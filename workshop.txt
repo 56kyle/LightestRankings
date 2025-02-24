@@ -1,0 +1,10 @@
+version=1
+title=Ranking PVE Lightest
+description=[h2]A more performant fork of [Ranking PVE Lighter](https://steamcommunity.com/sharedfiles/filedetails/?id=3141389812&searchtext=pve+lighter).[/h2]
+description=
+description=[h1]Bugs[/h1]
+description=Please submit any bugs you find here:
+description=https://github.com/56kyle/LightestRankings/issues
+description=[h3]Copyright 2025 Exceptionally Mediocre. Do as you will with this, just please link back to here if you fork.[/h3]
+tags=Build 41;
+visibility=public
