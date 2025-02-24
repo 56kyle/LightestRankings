@@ -1,0 +1,28 @@
+GSBQoLRankings_EN = {
+    UI_GSBQoL_Rankings_title = "Rankings",
+    UI_GSBQoL_Rankings_admin_title = "Rankings - Settings",
+    UI_GSBQoL_Rankings_SubMenu_Kills = "Kills",
+    UI_GSBQoL_Rankings_SubMenu_Deaths = "Deaths",
+    UI_GSBQoL_Rankings_SubMenu_OverallKills = "Overall Kills",
+    UI_GSBQoL_Rankings_SubMenu_Lifetime = "Lifetime",
+    UI_GSBQoL_Rankings_SubMenu_Factions = "Faction Kills",
+    UI_GSBQoL_Rankings_SubMenu_Scoreboard_Kills_Empty = "No zombie was killed",
+    UI_GSBQoL_Rankings_SubMenu_Scoreboard_Deaths_Empty = "No deaths",
+
+    UI_GSBQoLRankings_close = "Close",
+    UI_GSBQoLRankings_save = "Save",
+    UI_GSBQoLRankings_refresh = "Refresh",
+    UI_GSBQoLRankings_load = "Load",
+    UI_GSBQoLRankings_reset = "Reset",
+    UI_GSBQoLRankings_newSeason = "New",
+    UI_GSBQoLRankings_confirmModal_base = "Are you sure that you want to ",
+    UI_GSBQoLRankings_confirmModal_resetFaction = "reset the current Factions Season?",
+    UI_GSBQoLRankings_confirmModal_newFaction = "start a new Factions Season?",
+
+    UI_GSBQoLRankings_players = "Players",
+    UI_GSBQoLRankings_hiddenPlayers = "Hidden players",
+    UI_GSBQoLRankings_season = "Season",
+    UI_GSBQoLRankings_factionSeason = "Faction Season",
+    UI_GSBQoLRankings_noData = "no data loaded",
+
+}

@@ -1,0 +1,5 @@
+Sandbox_EN = {
+    Sandbox_GSBQoLRanking = "GSBQoL Ranking",
+    Sandbox_GSBQoLRankingListCap = "Total Positions Listed",
+    Sandbox_GSBQoLRankingListCap_tooltip = "Define how many positions will be listed. Set 0 (zero) to list all.",
+}

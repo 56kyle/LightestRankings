@@ -1,0 +1,5 @@
+Sandbox_PTBR = {
+Sandbox_GSBQoLRanking = "Classificacao GSBQoL",
+Sandbox_GSBQoLRankingListCap = "Total de posicoes listadas",
+Sandbox_GSBQoLRankingListCap_tooltip = "Defina quantas posicoes serão listadas. Defina 0 (zero) para listar todas.",
+}

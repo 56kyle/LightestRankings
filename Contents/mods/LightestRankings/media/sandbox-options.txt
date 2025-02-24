@@ -1,0 +1,7 @@
+VERSION = 1,
+
+option GSBQoLRanking.ListCap
+{
+	type = integer, default = 0, min = 0, max = 10000,
+	page = GSBQoLRanking, translation = GSBQoLRankingListCap,
+}

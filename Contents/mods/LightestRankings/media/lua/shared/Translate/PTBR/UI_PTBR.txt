@@ -1,0 +1,27 @@
+GSBQoLRankings_PTBR = {
+    UI_GSBQoL_Rankings_title = "Rankings",
+    UI_GSBQoL_Rankings_admin_title = "Rankings - Configurações",
+    UI_GSBQoL_Rankings_SubMenu_Kills = "Kills",
+    UI_GSBQoL_Rankings_SubMenu_Deaths = "Mortes",
+    UI_GSBQoL_Rankings_SubMenu_OverallKills = "Kills Total",
+    UI_GSBQoL_Rankings_SubMenu_Lifetime = "Tempo de Vida",
+    UI_GSBQoL_Rankings_SubMenu_Factions = "Kills por Facção",
+    UI_GSBQoL_Rankings_SubMenu_Scoreboard_Kills_Empty = "Nenhum zumbi morto",
+    UI_GSBQoL_Rankings_SubMenu_Scoreboard_Deaths_Empty = "Ninguém morreu",
+
+    UI_GSBQoLRankings_close = "Fechar",
+    UI_GSBQoLRankings_save = "Salvar",
+    UI_GSBQoLRankings_refresh = "Atualizar",
+    UI_GSBQoLRankings_load = "Carregar",
+    UI_GSBQoLRankings_reset = "Resetar",
+    UI_GSBQoLRankings_newSeason = "Nova",
+    UI_GSBQoLRankings_confirmModal_base = "Você tem certeza que deseja ",
+    UI_GSBQoLRankings_confirmModal_resetFaction = "resetar a temporada atual do Ranking de Facções?",
+    UI_GSBQoLRankings_confirmModal_newFaction = "começar uma nova temporada do Ranking de Facções?",
+
+    UI_GSBQoLRankings_players = "Jogadores",
+    UI_GSBQoLRankings_hiddenPlayers = "Jogadores ocultos",
+    UI_GSBQoLRankings_season = "Temporada",
+    UI_GSBQoLRankings_factionSeason = "Temporada de facções",
+    UI_GSBQoLRankings_noData = "dados não carregados",
+}
