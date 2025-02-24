@@ -50,9 +50,17 @@ local function onEveryHour()
 end
 Events.EveryHours.Add(onEveryHour)
 
--- Broadcast scoreboard/faction every 10 minutes
-local function onEveryTenMinutes()
-    GSBQoL.Rankings.Server.broadcastScoreboard()
-    GSBQoL.Rankings.Server.broadcastFaction()
+-- Broadcast scoreboard/faction once per in-game day
+-- This is the portion that was pretty heavy prior, so we change to doing once per day
+local broadcastInterval = SandboxVars.GSBQoLRanking.BroadcastInterval or 24  -- default to 24 hours
+local broadcastCounter = 0
+
+local function onBroadcastCheck()
+    broadcastCounter = broadcastCounter + 1
+    if broadcastCounter >= broadcastInterval then
+        broadcastCounter = 0
+        GSBQoL.Rankings.Server.broadcastScoreboard()
+        GSBQoL.Rankings.Server.broadcastFaction()
+    end
 end
-Events.EveryTenMinutes.Add(onEveryTenMinutes)
+Events.EveryHours.Add(onBroadcastCheck)
