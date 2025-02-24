@@ -166,36 +166,39 @@ function ISRankingScoreboardItemListBox:factionTooltip(listItem)
     return text;
 end
 
-function ISRankingScoreboardItemListBox:formatLifetime(data)
-    local ret = "";
-    if (data < 1) then
-        local minutes = math.floor(data * 60);
-        ret = append(ret, minutes, "min");
-    else
-        local days = math.floor(data / 24);
-        local hours = math.fmod(data, 24);
-        local months = math.floor(days / 30);
-        local years = math.floor(months / 12);
-        days = math.fmod(days, 30);
-        months = math.fmod(months, 12);
-        local minutes = math.floor(math.fmod(hours, 1) * 60);
-        hours = math.floor(hours);
-
-        function append(text, value, description)
-            if (value > 0) then
-                if text ~= "" then
-                    text = text .. " ";
-                end
-                text = text .. tostring(value) .. description
-            end
-            return text
-        end
-
-        ret = append(ret, years, "y");
-        ret = append(ret, months, "m");
-        ret = append(ret, days, "d");
-        ret = append(ret, hours, "h");
+function ISRankingScoreboardItemListBox:formatLifetime(hours)
+    if not hours or type(hours) ~= "number" or hours < 0 then
+        return "N/A" -- Handles nil, non-numeric, or invalid values safely
     end
 
-    return ret;
+    local function append(text, value, suffix)
+        if value > 0 then
+            return (text ~= "" and text .. " " or "") .. tostring(value) .. suffix
+        end
+        return text
+    end
+
+    local totalMinutes = math.floor(hours * 60)
+    if totalMinutes < 60 then
+        return tostring(totalMinutes) .. "min" -- Return only minutes if under 1 hour
+    end
+
+    local totalHours = math.floor(hours)
+    local days = math.floor(totalHours / 24)
+    local months = math.floor(days / 30)
+    local years = math.floor(months / 12)
+
+    local remainingDays = days % 30
+    local remainingMonths = months % 12
+    local remainingHours = totalHours % 24
+    local remainingMinutes = totalMinutes % 60
+
+    local formattedTime = ""
+    formattedTime = append(formattedTime, years, "y")
+    formattedTime = append(formattedTime, remainingMonths, "m")
+    formattedTime = append(formattedTime, remainingDays, "d")
+    formattedTime = append(formattedTime, remainingHours, "h")
+    formattedTime = append(formattedTime, remainingMinutes, "min")
+
+    return formattedTime
 end
