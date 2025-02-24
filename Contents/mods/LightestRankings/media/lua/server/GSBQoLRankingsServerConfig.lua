@@ -1,39 +1,37 @@
--- ============================================================
+-- ===================================================================
 --  GSBQoLRankingsServerConfig.lua
---  Basic configuration & data references
--- ============================================================
+--  Configuration, initial mod data setup, base references.
+-- ===================================================================
+local Server = GSBQoL.Rankings.Server
 
-GSBQoL.Rankings.Server.Config = {
-    TOP_SCOREBOARD_SIZE = 50,  -- max scoreboard size per category
-    INACTIVE_DAYS = 30         -- days offline before archiving
+Server.Config = {
+    maxTopListSize = 50,
+    daysBeforeArchive = 30
 }
 
--- We'll store the mod data in GSBQoL.Rankings.Server.data
-
-function GSBQoL.Rankings.Server.SaveModData()
-    if not GSBQoL.Rankings.Server.data then return end
-    ModData.add(GSBQoL.Rankings.Shared.MODDATA, GSBQoL.Rankings.Server.data)
+function Server.saveData()
+    if Server.data then
+        ModData.add(GSBQoL.Rankings.Shared.MODDATA, Server.data)
+    end
 end
 
--- Helper to get PZ "world age in hours" for measuring time
-function GSBQoL.Rankings.Server.GetGameHours()
+function Server.getWorldHours()
     return getGameTime():getWorldAgeHours()
 end
 
--- OnInitGlobalModData
-function GSBQoL.Rankings.Server.OnInitGlobalModData(isNewGame)
+function Server.OnInitGlobalModData(isNewGame)
     if not ModData.exists(GSBQoL.Rankings.Shared.MODDATA) then
         ModData.create(GSBQoL.Rankings.Shared.MODDATA)
     end
 
     local data = ModData.get(GSBQoL.Rankings.Shared.MODDATA)
+
     data.players = data.players or {}
-    data.factions = data.factions or {}
     data.archivedPlayers = data.archivedPlayers or {}
+    data.factions = data.factions or {}
     data.ignoredPlayersList = data.ignoredPlayersList or {}
     data.factionSeasons = data.factionSeasons or {}
 
-    -- We'll store top-lists in data.topLists
     data.topLists = data.topLists or {
         kills = {},
         deaths = {},
@@ -41,20 +39,17 @@ function GSBQoL.Rankings.Server.OnInitGlobalModData(isNewGame)
         lifetime = {}
     }
 
-    -- Fix older data that might not have lastSeen
-    for playerName, pData in pairs(data.players) do
-        if not pData.lastSeen then
-            pData.lastSeen = GSBQoL.Rankings.Server.GetGameHours()
+    for name, record in pairs(data.players) do
+        if not record.lastSeen then
+            record.lastSeen = Server.getWorldHours()
         end
     end
 
-    GSBQoL.Rankings.Server.data = data
+    Server.data = data
 
-    -- Rebuild scoreboard once
-    GSBQoL.Rankings.Server.RebuildAllScoreboards()
+    Server.rebuildAllScoreboards()
 
-    GSBQoL.Rankings.Server.Logger.info("OnInitGlobalModData", { "GSBQoL Rankings data loaded/created." })
+    Server.Logger.info("OnInitGlobalModData", {"Loaded or created GSBQoLRankings data."})
 end
 
-
-
+Events.OnInitGlobalModData.Add(Server.OnInitGlobalModData)

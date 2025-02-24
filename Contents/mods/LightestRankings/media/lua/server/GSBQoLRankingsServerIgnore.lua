@@ -1,27 +1,22 @@
--- ============================================================
+-- ===================================================================
 --  GSBQoLRankingsServerIgnore.lua
---  Logic to filter ignored players (if needed)
--- ============================================================
-
+--  Manages logic for ignoring specific players.
+-- ===================================================================
 local Server = GSBQoL.Rankings.Server
 
--- The original mod used filterPlayers() to remove them from broadcast.
--- With our top-lists approach, you can remove them from top lists or skip them.
--- We'll just replicate the old approach so it's available if needed:
-
+-- This replicates old "filterPlayers" logic,
+-- ignoring all players in data.ignoredPlayersList if needed.
 function Server.filterPlayers()
     local data = Server.data
-    local allPlayers = data.players
-    local ignored = data.ignoredPlayersList
-    if not ignored then
-        return allPlayers
+    if not data.ignoredPlayersList then
+        return data.players
     end
 
-    local filtered = {}
-    for pName, stats in pairs(allPlayers) do
-        if not ignored[pName] then
-            filtered[pName] = stats
+    local results = {}
+    for pName, stats in pairs(data.players) do
+        if not data.ignoredPlayersList[pName] then
+            results[pName] = stats
         end
     end
-    return filtered
+    return results
 end

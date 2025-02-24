@@ -1,43 +1,42 @@
--- ============================================================
+-- ===================================================================
 --  GSBQoLRankingsServerArchive.lua
---  Logic responsible for archiving players
--- ============================================================
-
+--  Archives inactive players not on top lists.
+-- ===================================================================
 local Server = GSBQoL.Rankings.Server
 local Config = Server.Config
 
-function Server.PruneInactivePlayers()
-    local data = Server.data
-    local nowH = Server.GetGameHours()
-    local cutoff = Config.INACTIVE_DAYS * 24
+local function pruneInactivePlayers()
+    local nowHours = Server.getWorldHours()
+    local cutoff = Config.daysBeforeArchive * 24
 
-    local toRemove = {}
-    for playerName, pData in pairs(data.players) do
-        if not Server.PlayerIsOnAnyTopList(playerName) then
-            local lastSeen = pData.lastSeen or 0
-            if (nowH - lastSeen) >= cutoff then
-                data.archivedPlayers[playerName] = pData
-                table.insert(toRemove, playerName)
+    local removed = {}
+    for playerName, record in pairs(Server.data.players) do
+        if not Server.isOnAnyTopList(playerName) then
+            local lastSeen = record.lastSeen or 0
+            if (nowHours - lastSeen) >= cutoff then
+                Server.data.archivedPlayers[playerName] = record
+                table.insert(removed, playerName)
             end
         end
     end
 
-    for _, rmName in ipairs(toRemove) do
-        data.players[rmName] = nil
+    for _, delName in ipairs(removed) do
+        Server.data.players[delName] = nil
     end
 
-    if #toRemove > 0 then
-        Server.Logger.info("PruneInactivePlayers", { "Archived", #toRemove, "players" })
-        Server.SaveModData()
+    if #removed > 0 then
+        Server.Logger.info("pruneInactivePlayers", {"Archived players:", #removed})
+        Server.saveData()
     end
 end
 
--- We'll run this every 24 hours
-local pruneDayCounter = 0
-Events.EveryHours.Add(function()
-    pruneDayCounter = pruneDayCounter + 1
-    if pruneDayCounter >= 24 then
-        pruneDayCounter = 0
-        Server.PruneInactivePlayers()
+local dayCheck = 0
+local function onEveryHourCheckArchive()
+    dayCheck = dayCheck + 1
+    if dayCheck >= 24 then
+        dayCheck = 0
+        pruneInactivePlayers()
     end
-end)
+end
+
+Events.EveryHours.Add(onEveryHourCheckArchive)

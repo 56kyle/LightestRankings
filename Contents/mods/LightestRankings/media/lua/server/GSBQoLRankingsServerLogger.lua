@@ -1,44 +1,38 @@
--- ============================================================
+-- ===================================================================
 --  GSBQoLRankingsServerLogger.lua
---  Logic responsible for handling logging
--- ============================================================
-
+--  Logging functionality (unchanged except for naming improvements).
+-- ===================================================================
 local Logger = GSBQoL.Rankings.Server.Logger
 
-function Logger.convertToBrackets(list)
-    local function concat(text, newText)
-        local nt = "[" .. newText .. "]"
-        if text == "" then
-            return nt
-        else
-            return text .. " " .. nt
-        end
+function Logger.convertMessagesToBracketText(messages)
+    local function bracketify(base, text)
+        return base == "" and ("[" .. text .. "]") or (base .. " [" .. text .. "]")
     end
 
     local result = ""
-    for _, txt in ipairs(list) do
-        result = concat(result, txt)
+    for _, msg in ipairs(messages) do
+        result = bracketify(result, msg)
     end
     return result
 end
 
-function Logger.write(logType, module, messages)
-    local logEntries = {}
-    table.insert(logEntries, logType)
-    table.insert(logEntries, module)
-    if messages then
-        for _, m in ipairs(messages) do
-            table.insert(logEntries, m)
+function Logger.write(level, moduleName, messageArray)
+    local combined = {}
+    table.insert(combined, level)
+    table.insert(combined, moduleName)
+    if messageArray then
+        for _, m in ipairs(messageArray) do
+            table.insert(combined, m)
         end
     end
-
-    writeLog(GSBQoL.Rankings.Shared.MODULE_NAME, Logger.convertToBrackets(logEntries))
+    local text = Logger.convertMessagesToBracketText(combined)
+    writeLog(GSBQoL.Rankings.Shared.MODULE_NAME, text)
 end
 
-function Logger.info(module, messages)
-    Logger.write("INFO", module, messages)
+function Logger.info(moduleName, messageArray)
+    Logger.write("INFO", moduleName, messageArray)
 end
 
-function Logger.error(module, messages)
-    Logger.write("ERROR", module, messages)
+function Logger.error(moduleName, messageArray)
+    Logger.write("ERROR", moduleName, messageArray)
 end

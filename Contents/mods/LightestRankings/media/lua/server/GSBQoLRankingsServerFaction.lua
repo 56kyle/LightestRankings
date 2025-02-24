@@ -1,49 +1,49 @@
--- ============================================================
+-- ===================================================================
 --  GSBQoLRankingsServerFaction.lua
---  Logic responsible for ranking out of a Faction
--- ============================================================
-
+--  Manages faction kill tracking for each player.
+-- ===================================================================
 local Server = GSBQoL.Rankings.Server
 
-function Server.registerKillsInFaction(player, zombieKills, data, dataPlayer)
-    if not zombieKills then return end
+function Server.registerFactionKills(player, killCount, data, record)
+    if not killCount then return end
 
-    local killsInSession = zombieKills - (dataPlayer["killsRegisteredInFaction"] or 0)
-    if killsInSession <= 0 then return end
+    local currentInFaction = killCount - (record.killsRegisteredInFaction or 0)
+    if currentInFaction <= 0 then return end
 
     local userName = player:getUsername()
-    local factions = data["factions"]
-    if not factions then
-        factions = {}
-        data["factions"] = factions
+    local factionSet = data.factions
+    if not factionSet then
+        factionSet = {}
+        data.factions = factionSet
     end
 
     local playerFaction = Faction.getPlayerFaction(player)
     if playerFaction then
-        local name = playerFaction:getName()
-        local factionData = factions[name]
-        if not factionData then
-            factionData = {
-                name = name,
+        local factionName = playerFaction:getName()
+        local info = factionSet[factionName]
+        if not info then
+            info = {
+                name = factionName,
                 kills = 0,
                 killsDetailed = {}
             }
         end
 
-        factionData["kills"] = factionData["kills"] + killsInSession
+        info.kills = info.kills + currentInFaction
         local colorInfo = playerFaction:getTagColor()
-        factionData["tag"] = playerFaction:getTag()
-        factionData["color"] = {
+        info.tag = playerFaction:getTag()
+        info.color = {
             r = colorInfo:getR(),
             g = colorInfo:getG(),
             b = colorInfo:getB()
         }
 
-        local kd = factionData["killsDetailed"]
-        kd[userName] = (kd[userName] or 0) + killsInSession
-        factionData["killsDetailed"] = kd
-        factions[name] = factionData
+        local kd = info.killsDetailed
+        kd[userName] = (kd[userName] or 0) + currentInFaction
+        info.killsDetailed = kd
+
+        factionSet[factionName] = info
     end
 
-    dataPlayer["killsRegisteredInFaction"] = zombieKills
+    record.killsRegisteredInFaction = killCount
 end
