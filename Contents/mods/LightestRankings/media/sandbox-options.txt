@@ -11,3 +11,9 @@ option GSBQoLRanking.BroadcastInterval
 	type = integer, default = 24, min = 1, max = 168,
 	page = GSBQoLRanking, translation = GSBQoLRankingBroadcastInterval,
 }
+
+option GSBQoLRanking.ArchiveInterval
+{
+	type = integer, default = 24, min = 1, max = 168,
+	page = GSBQoLRanking, translation = GSBQoLRankingArchiveInterval,
+}

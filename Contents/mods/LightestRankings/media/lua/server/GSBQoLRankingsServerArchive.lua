@@ -32,11 +32,13 @@ local function pruneInactivePlayers()
     end
 end
 
-local dayCheck = 0
+local archiveInterval = SandboxVars.GSBQoLRanking.PruneInterval or 24
+local daysSinceLastArchive = 0
+
 local function onEveryHourCheckArchive()
-    dayCheck = dayCheck + 1
-    if dayCheck >= 24 then
-        dayCheck = 0
+    daysSinceLastArchive = daysSinceLastArchive + 1
+    if daysSinceLastArchive >= archiveInterval then
+        daysSinceLastArchive = 0
         pruneInactivePlayers()
     end
 end
