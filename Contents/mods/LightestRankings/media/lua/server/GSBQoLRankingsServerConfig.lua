@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerConfig.lua
 --  Configuration, initial mod data setup, base references.
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 
 Server.Config = {

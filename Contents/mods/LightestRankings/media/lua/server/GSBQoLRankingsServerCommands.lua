@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerCommands.lua
 --  Handles BaseInfo, DeathKillsCount, ignoring players, etc.
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 
 Server.Commands = Server.Commands or {}

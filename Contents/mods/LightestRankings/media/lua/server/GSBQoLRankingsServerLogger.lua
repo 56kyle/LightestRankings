@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerLogger.lua
 --  Logging functionality (unchanged except for naming improvements).
 -- ===================================================================
+if isClient() then return end
+
 local Logger = GSBQoL.Rankings.Server.Logger
 
 function Logger.convertMessagesToBracketText(messages)

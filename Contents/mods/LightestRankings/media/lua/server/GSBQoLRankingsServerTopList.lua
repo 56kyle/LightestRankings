@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerTopList.lua
 --  Manages top lists (kills, deaths, overallKills, lifetime)
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 local Config = Server.Config
 

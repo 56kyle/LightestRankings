@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerArchive.lua
 --  Archives inactive players not on top lists.
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 local Config = Server.Config
 

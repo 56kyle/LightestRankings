@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerFaction.lua
 --  Manages faction kill tracking for each player.
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 
 function Server.registerFactionKills(player, killCount, data, record)

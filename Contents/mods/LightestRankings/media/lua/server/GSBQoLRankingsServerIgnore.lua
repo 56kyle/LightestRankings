@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerIgnore.lua
 --  Manages logic for ignoring specific players.
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 
 -- This replicates old "filterPlayers" logic,
