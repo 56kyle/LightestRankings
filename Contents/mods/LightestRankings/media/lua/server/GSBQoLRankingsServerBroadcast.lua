@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerBroadcast.lua
 --  Broadcasting scoreboard & faction data to clients.
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 
 function Server.broadcastScoreboard()

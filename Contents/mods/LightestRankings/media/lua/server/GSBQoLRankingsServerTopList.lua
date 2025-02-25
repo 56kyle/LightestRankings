@@ -2,6 +2,8 @@
 --  GSBQoLRankingsServerTopList.lua
 --  Manages top lists (kills, deaths, overallKills, lifetime)
 -- ===================================================================
+if isClient() then return end
+
 local Server = GSBQoL.Rankings.Server
 local Config = Server.Config
 
@@ -32,7 +34,7 @@ local function insertOrUpdateRank(category, playerName, value)
         table.insert(topList, { name = playerName, value = value })
     end
 
-    if #topList > Config.maxTopListSize then
+    if #topList > Config.scoreboardSize then
         table.remove(topList) -- remove last
     end
 end

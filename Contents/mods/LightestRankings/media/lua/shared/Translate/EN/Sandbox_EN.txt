@@ -2,4 +2,12 @@ Sandbox_EN = {
     Sandbox_GSBQoLRanking = "GSBQoL Ranking",
     Sandbox_GSBQoLRankingListCap = "Total Positions Listed",
     Sandbox_GSBQoLRankingListCap_tooltip = "Define how many positions will be listed. Set 0 (zero) to list all.",
+    Sandbox_GSBQoLRankingBroadcastInterval = "Broadcast Leaderboard Interval (In-game hours)"
+    Sandbox_GSBQoLRankingBroadcastInterval_tooltip = "Sets how many in-game hours pass between sending client's leaderboard info. This is the heaviest operation so be careful with this."
+    Sandbox_GSBQoLRankingArchiveInterval = "Archive Inactive Players Interval (In-game hours)"
+    Sandbox_GSBQoLRankingArchiveInterval_tooltip = "Sets how many in-game hours pass between each archival wave attempt. Probably fine using the default value for this."
+    Sandbox_GSBQoLRankingScoreboardSize = "Scoreboard Size"
+    Sandbox_GSBQoLRankingScoreboardSize_tooltip = "Sets the size of the scoreboard being tracked. If raising this, try to do so in increments. Can maybe compound due to sorting size increases w/ this value."
+    Sandbox_GSBQoLRankingDaysBeforeArchive = "Days Before Player Set Inactive"
+    Sandbox_GSBQoLRankingDaysBeforeArchive_tooltip = "The amount of in-game days that will pass before a player is archived. This is a reversible process and no data is lost. Additionally, any players on a leaderboard will not be archived."
 }
