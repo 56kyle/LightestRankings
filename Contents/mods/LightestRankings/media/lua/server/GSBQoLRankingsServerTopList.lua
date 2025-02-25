@@ -34,7 +34,7 @@ local function insertOrUpdateRank(category, playerName, value)
         table.insert(topList, { name = playerName, value = value })
     end
 
-    if #topList > Config.maxTopListSize then
+    if #topList > Config.scoreboardSize then
         table.remove(topList) -- remove last
     end
 end

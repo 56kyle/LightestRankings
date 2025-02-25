@@ -7,8 +7,8 @@ if isClient() then return end
 local Server = GSBQoL.Rankings.Server
 
 Server.Config = {
-    maxTopListSize = 50,
-    daysBeforeArchive = 30
+    scoreboardSize = SandboxVars.GSBQoLRanking.ScoreboardSize or 50,
+    daysBeforeArchive = SandboxVars.GSBQoLRanking.DaysBeforeArchive or 30
 }
 
 function Server.saveData()
