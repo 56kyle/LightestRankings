@@ -8,7 +8,7 @@ option GSBQoLRanking.ListCap
 
 option GSBQoLRanking.BroadcastInterval
 {
-	type = integer, default = 24, min = 1, max = 168,
+	type = integer, default = 4, min = 1, max = 168,
 	page = GSBQoLRanking, translation = GSBQoLRankingBroadcastInterval,
 }
 
@@ -21,11 +21,11 @@ option GSBQoLRanking.ArchiveInterval
 option GSBQoLRanking.ScoreboardSize
 {
     type = integer, default = 50, min = 1, max = 1000,
-    page = GSBQoLRanking, translation = GSBQoLRankingScoreboardSize
+    page = GSBQoLRanking, translation = GSBQoLRankingScoreboardSize,
 }
 
 option GSBQoLRanking.DaysBeforeArchive
 {
     type = integer, default = 30, min = 1, max = 1000,
-    page = GSBQoLRanking, translation = GSBQoLRankingDaysBeforeArchive
+    page = GSBQoLRanking, translation = GSBQoLRankingDaysBeforeArchive,
 }

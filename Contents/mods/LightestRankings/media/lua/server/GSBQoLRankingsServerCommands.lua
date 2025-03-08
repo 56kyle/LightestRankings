@@ -60,8 +60,6 @@ function Server.Commands.DeathKillsCount(player, args)
 
     Server.data.players[userName] = record
     Server.saveData()
-
-    Server.broadcastScoreboard()
 end
 
 function Server.Commands.IgnorePlayers(player, args)

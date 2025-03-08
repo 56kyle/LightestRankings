@@ -197,8 +197,12 @@ function ISRankingScoreboardItemListBox:formatLifetime(hours)
     formattedTime = append(formattedTime, years, "y")
     formattedTime = append(formattedTime, remainingMonths, "m")
     formattedTime = append(formattedTime, remainingDays, "d")
-    formattedTime = append(formattedTime, remainingHours, "h")
-    formattedTime = append(formattedTime, remainingMinutes, "min")
+    if months < 1 then
+        formattedTime = append(formattedTime, remainingHours, "h")
+    end
+    if days < 1 then
+        formattedTime = append(formattedTime, remainingMinutes, "min")
+    end
 
     return formattedTime
 end
